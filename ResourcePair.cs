@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Resources;
 
@@ -29,11 +29,19 @@ public class ResourcePair
             throw new Exception("EnglishString is not found for " + key);
     }
 
-    public static ResourcePair operator +(ResourcePair resourcePair1, string resourcePair2)
+    public static ResourcePair operator +(ResourcePair resourcePair1, ResourcePair resourcePair2)
     {
         return new ResourcePair(
-            resourcePair1.LocaleString + resourcePair2,
-            resourcePair1.EnglishString + resourcePair2
+            resourcePair1.LocaleString + resourcePair2.LocaleString,
+            resourcePair1.EnglishString + resourcePair2.EnglishString
+        );
+    }
+
+    public static ResourcePair operator +(ResourcePair resourcePair1, string value)
+    {
+        return new ResourcePair(
+            resourcePair1.LocaleString + value,
+            resourcePair1.EnglishString + value
         );
     }
 
